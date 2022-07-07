@@ -15,27 +15,38 @@ public class Kata {
   static String compute(String number) {
     int num = Integer.parseInt(number);
     StringBuilder result = new StringBuilder();
+    boolean isDivisible = false;
 
-    if (num % 3 == 0)
+    if (num % 3 == 0) {
       result.append("Foo");
-    if (num % 5 == 0)
+      isDivisible = true;
+    }
+    if (num % 5 == 0) {
       result.append("Bar");
-    if (num % 7 == 0)
+      isDivisible = true;
+    }
+    if (num % 7 == 0) {
       result.append("Qix");
+      isDivisible = true;
+    }
 
-    digitMatch(number, result);
+    digitMatch(number, result, isDivisible);
 
     return result.toString();
   }
 
-  private static void digitMatch(String number, StringBuilder result) {
+  private static void digitMatch(String number, StringBuilder result, boolean isDivisible) {
     for (char c : number.toCharArray()) {
-      if (c == '3')
+      if (c == '0')
+        result.append('*');
+      else if (c == '3')
         result.append("Foo");
       else if (c == '5')
         result.append("Bar");
       else if (c == '7')
         result.append("Qix");
+      else if (!isDivisible)
+        result.append(c);
     }
   }
 }
